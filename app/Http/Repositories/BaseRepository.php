@@ -31,9 +31,13 @@ class BaseRepository
         return $this->model->create($attributes);
     }
 
-    public function update($attributes, $id)
+    public function update($attributes, $id): bool
     {
-        return $this->findById($id)->update($attributes);
+        $result = $this->findById($id);
+        if ($result) {
+            return $result->update($attributes);
+        }
+        return false;
     }
 
     public function deleteById($id): bool

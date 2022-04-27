@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Rent;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
+use Illuminate\Contracts\Validation\Validator;
 
 /**
  * @property mixed $user_id
@@ -27,14 +30,31 @@ class RentRequest extends FormRequest
      */
     public function rules()
     {
-        $userExist = Rule::exists('users')->where(function ($query) {
+        $userExist = Rule::exists('users', 'id')->where(function ($query) {
             return $query->where('id', $this->user_id);
         });
 
         return [
             'user_id' => ['required', $userExist],
             'rent_type' => 'required|string',
-            'status' => 'required|string'
+            'status' => 'required_if:status,==,null|string|in:' . Rent::RETURNED . ',' . Rent::RENTED
         ];
+    }
+
+    /**
+     * @param Validator $validator
+     * @return void
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = $validator->errors();
+
+        $response = response()->json([
+            'success' => false,
+            'message' => 'Invalid data send',
+            'details' => $errors->messages(),
+        ], 422);
+
+        throw new HttpResponseException($response);
     }
 }

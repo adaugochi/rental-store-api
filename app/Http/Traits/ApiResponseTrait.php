@@ -64,11 +64,12 @@ trait ApiResponseTrait
      * Respond with success.
      *
      * @param string $message
+     * @param int $statusCode
      * @return JsonResponse
      */
-    protected function respondSuccess(string $message = ''): JsonResponse
+    protected function respondSuccess(string $message = '', int $statusCode = 200): JsonResponse
     {
-        return $this->apiResponse(['success' => true, 'message' => $message]);
+        return $this->apiResponse(['success' => true, 'message' => $message], $statusCode);
     }
 
     /**
@@ -76,16 +77,14 @@ trait ApiResponseTrait
      *
      * @param $message
      * @param int $statusCode
-     * @param Exception|null $exception
      * @param int $error_code
      * @return JsonResponse
      */
-    protected function respondError($message, int $statusCode = 400, Exception $exception = null, int $error_code = 1): JsonResponse
+    protected function respondError($message, int $statusCode = 400, int $error_code = 1): JsonResponse
     {
         return $this->apiResponse([
             'success'    => false,
             'message'    => $message ?? 'There was an internal error, Pls try again later',
-            'exception'  => $exception,
             'error_code' => $error_code,
         ], $statusCode);
     }
