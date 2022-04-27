@@ -1,64 +1,113 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<h1 align="center">
+    <a href="https://macadaa.herokuapp.com/" target="_blank">
+        Rental Store
+    </a>
+</h1>
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <a href="https://laravel.com/docs/8.x/installation">
+        <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg"  width="100" alt="License">
+    </a>
 </p>
 
-## About Laravel
+## About
+The store rents out books and equipment to users.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
+- ERD for the database
+- Endpoints
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
+- PHP 7.4
+- composer
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Clone
+You have to clone this repo using either `HTTPS` or `SSH`
 
-## Learning Laravel
+- HTTPS
+```bash
+git clone https://github.com/adaugochi/rental-store-api.git
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- SSH
+```bash
+git clone git@github.com:adaugochi/rental-store-api.git
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Install Dependencies
+#### Composer Dependencies
+```bash
+composer install
+```
 
-## Laravel Sponsors
+## Virtual Host Setup (optional)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+*Windows*
+[Link 1](http://foundationphp.com/tutorials/apache_vhosts.php)
+[Link 2](https://www.kristengrote.com/blog/articles/how-to-set-up-virtual-hosts-using-wamp)
 
-### Premium Partners
+*Mac*
+[Link 1](http://coolestguidesontheplanet.com/set-virtual-hosts-apache-mac-osx-10-9-mavericks-osx-10-8-mountain-lion/)
+[Link 2](http://coolestguidesontheplanet.com/set-virtual-hosts-apache-mac-osx-10-10-yosemite/)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+*Debian Linux*
+[Link 1](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts)
+[Link 2](http://www.unixmen.com/setup-apache-virtual-hosts-on-ubuntu-15-04/)
 
-## Contributing
+Sample Virtual Host Config for Apache
+```apache
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    DocumentRoot "<WebServer Root Dir>/rental-store-api/public"
+    ServerName local.manup.com
+    <Directory <WebServer Root Dir>/rental-store-api/public>
+       AllowOverride all
+       Options -MultiViews
+      Require all granted
+    </Directory>
+</VirtualHost>
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Environment Variables
+Make a copy of `.env.example` to `.env` in the env directory.
+
+## Setup Database
+
+#### Create Database
+```sql
+CREATE DATABASE rental_store;
+```
+
+### Migration
+```bash
+php artisan migrate
+```
+
+### Specify Path
+```bash
+php artisan migrate --path=database/migrations/filename.php
+```
+
+### Seeding
+```bash
+php artisan db:seed --class=UserRentSeeder
+```
+
+## Starting the Application
+You can run the application in development mode by running this command from the project directory:
+
+```bash
+php artisan serve
+```
+
+## Author of README.md
+- Adaa Mgbede <adaamgbede@gmail.com>
+
+## Credits
+- Adaa Mgbede <adaamgbede@gmail.com>
+
+
 
 ## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+In order to ensure that the Laravel community is welcoming to all, please review and
+abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
