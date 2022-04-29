@@ -21,9 +21,14 @@ class BaseRepository
         return $this->model->where($conditions)->with($with)->first();
     }
 
-    public function findAll($conditions = [], $with = [], $paginate = 10)
+    public function findAll($conditions = [], $with = [], $paginate = null)
     {
-        return $this->model->where($conditions)->with($with)->orderBy('id', 'DESC')->paginate($paginate);
+        $result = $this->model->where($conditions)->with($with)->orderBy('id', 'DESC');
+
+        if ($paginate) {
+            return $result->paginate($paginate);
+        }
+        return $result->get();
     }
 
     public function insert($attributes)

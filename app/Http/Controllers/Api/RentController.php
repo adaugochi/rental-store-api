@@ -94,4 +94,10 @@ class RentController extends Controller
             return $this->respondError($ex->getMessage());
         }
     }
+
+    public function statisticLogs($type = null, $status = null): JsonResponse
+    {
+        $total = $this->rentService->getTotalCountByTypeAndStatus($type, $status);
+        return $this->apiResponse(['success' => true, 'result' => $total]);
+    }
 }

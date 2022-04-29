@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\RentController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,9 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Api'
 ], function () {
     Route::apiResource('rents', 'RentController');
+    Route::get('rents/{type}/{status}', [RentController::class, 'statisticLogs']);
+
+    Route::get('users', [UserController::class, 'index']);
+    Route::get('users/{id}/rents', [UserController::class, 'getUserRents']);
 });
 
