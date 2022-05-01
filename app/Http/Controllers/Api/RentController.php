@@ -22,11 +22,15 @@ class RentController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $data = $this->rentService->loadAll();
+        $type = $request->get('rent');
+        $status = $request->get('status');
+
+        $data = $this->rentService->loadAll($type, $status);
         return $this->apiResponse(['success' => true, 'result' => $data]);
     }
 
@@ -99,5 +103,11 @@ class RentController extends Controller
     {
         $total = $this->rentService->getTotalCountByTypeAndStatus($type, $status);
         return $this->apiResponse(['success' => true, 'result' => $total]);
+    }
+
+    public function getLogs(): JsonResponse
+    {
+        $logs = $this->rentService->getLogs();
+        return $this->apiResponse(['success' => true, 'result' => $logs]);
     }
 }

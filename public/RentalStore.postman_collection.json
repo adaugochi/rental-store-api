@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "38779236-6de2-486f-aa42-003dc6c48c24",
+		"name": "Rental Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Rents",
+			"item": [
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}rents/13",
+							"host": [
+								"{{base_url}}rents"
+							],
+							"path": [
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"to\":\"2348109030672\",\n    \"recipient_type\":\"individual\",\n    \"deduplication_id\": \"7f602428-3b00-49a7-a129-56e00e9b8121\",\n    \"priority\": \"high\",\n    \"type\":\"text\",\n    \"message\": \"Hello World\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}rents",
+							"host": [
+								"{{base_url}}rents"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "rented",
+									"disabled": true
+								},
+								{
+									"key": "rent",
+									"value": "books",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "rent_type",
+									"value": "books",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "returned",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}rents",
+							"host": [
+								"{{base_url}}rents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "returned",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}rents/12",
+							"host": [
+								"{{base_url}}rents"
+							],
+							"path": [
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "returned",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}rents/12",
+							"host": [
+								"{{base_url}}rents"
+							],
+							"path": [
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total books returned",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}rents/books/returned",
+							"host": [
+								"{{base_url}}rents"
+							],
+							"path": [
+								"books",
+								"returned"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total books rented",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}rents/books/rented",
+							"host": [
+								"{{base_url}}rents"
+							],
+							"path": [
+								"books",
+								"rented"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total equipment rented",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}rents/equipment/rented",
+							"host": [
+								"{{base_url}}rents"
+							],
+							"path": [
+								"equipment",
+								"rented"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total equipment returned",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}rents/equipment/returned",
+							"host": [
+								"{{base_url}}rents"
+							],
+							"path": [
+								"equipment",
+								"returned"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}rent/logs",
+							"host": [
+								"{{base_url}}rent"
+							],
+							"path": [
+								"logs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}users",
+							"host": [
+								"{{base_url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Rents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}users/12/rents",
+							"host": [
+								"{{base_url}}users"
+							],
+							"path": [
+								"12",
+								"rents"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

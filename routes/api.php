@@ -25,6 +25,7 @@ Route::group([
 ], function () {
     Route::apiResource('rents', 'RentController');
     Route::get('rents/{type}/{status}', [RentController::class, 'statisticLogs']);
+    Route::get('rent/logs', [RentController::class, 'getLogs']);
 
     Route::get('users', [UserController::class, 'index']);
     Route::get('users/{id}/rents', [UserController::class, 'getUserRents']);

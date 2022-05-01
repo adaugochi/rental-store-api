@@ -14,8 +14,13 @@
 The store rents out books and equipment to users.
 
 ## Features
-- ERD for the database
+- ERD for the database. Located `project_directory/public/images/ERD.png`
 - Endpoints
+- Postman collection. Located `project_directory/public/RentalStore.postman_collection.json`
+- Check Logs. Command to run is seen below
+```bash
+php artisan check:logs
+```
 
 ## Requirements
 - PHP 7.4
@@ -95,7 +100,6 @@ php artisan db:seed --class=UserRentSeeder
 
 ## Starting the Application
 You can run the application in development mode by running this command from the project directory:
-
 ```bash
 php artisan serve
 ```
@@ -105,9 +109,3 @@ php artisan serve
 
 ## Credits
 - Adaa Mgbede <adaamgbede@gmail.com>
-
-
-
-## Code of Conduct
-In order to ensure that the Laravel community is welcoming to all, please review and
-abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).

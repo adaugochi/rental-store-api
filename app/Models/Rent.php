@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Http\Traits\DateTimeFormatTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Rent extends Model
 {
-    use HasFactory;
+    use HasFactory, DateTimeFormatTrait;
 
     const RENTED = 'rented';
     const RETURNED = 'returned';

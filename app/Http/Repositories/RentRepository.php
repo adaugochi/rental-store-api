@@ -11,4 +11,12 @@ class RentRepository extends BaseRepository
         $this->model = new Rent();
         parent::__construct($this->model);
     }
+
+    public function intervalLogs($type, $status, $interval = 1)
+    {
+        return $this->model
+            ->where(['rent_type' => $type, 'status' => $status])
+            ->whereRaw("created_at > CURRENT_DATE() - INTERVAL $interval MONTH")
+            ->get();
+    }
 }

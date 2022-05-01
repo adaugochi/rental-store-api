@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Repositories\RentRepository;
+use App\Models\Rent;
 use ErrorException;
 
 class RentService
@@ -14,9 +15,17 @@ class RentService
         $this->rentRepository = new RentRepository();
     }
 
-    public function loadAll()
+    public function loadAll($type, $status)
     {
-        return $this->rentRepository->findAll([], ['user'], 10);
+        if ($type && $status) {
+            return $this->rentRepository->findAll(['rent_type' => $type, 'status' => $status], ['user'], 20);
+        } elseif ($status) {
+            return $this->rentRepository->findAll(['status' => $status], ['user'], 20);
+        } elseif ($type) {
+            return $this->rentRepository->findAll(['rent_type' => $type], ['user'], 20);
+        } else {
+            return $this->rentRepository->findAll([], ['user'], 20);
+        }
     }
 
     public function addRent($postData)
@@ -56,9 +65,19 @@ class RentService
 
     public function getTotalCountByTypeAndStatus($type, $status): int
     {
-        $result = $this->rentRepository->findAll(['rent_type' => $type, 'status' => $status]);
+        $result = $this->rentRepository->intervalLogs($type, $status);
         if ($result) return count($result);
 
         return 0;
+    }
+
+    public function getLogs(): array
+    {
+        return [
+            'Total books rented' => $this->getTotalCountByTypeAndStatus(Rent::BOOKS, Rent::RENTED),
+            'Total books returned' => $this->getTotalCountByTypeAndStatus(Rent::BOOKS, Rent::RETURNED),
+            'Total equipment rented' => $this->getTotalCountByTypeAndStatus(Rent::EQUIPMENT, Rent::RENTED),
+            'Total equipment returned' => $this->getTotalCountByTypeAndStatus(Rent::EQUIPMENT, Rent::RETURNED)
+        ];
     }
 }
